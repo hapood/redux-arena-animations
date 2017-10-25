@@ -1,0 +1,7 @@
+{
+  "name": "redux-arena/ArenaSceneLoadMotion",
+  "private": true,
+  "main": "../lib/ArenaSceneLoadMotion/index.js",
+  "module": "../es/ArenaSceneLoadMotion/index.js",
+  "jsnext:main": "../es/ArenaSceneLoadMotion/index.js"
+}

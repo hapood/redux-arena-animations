@@ -1,0 +1,7 @@
+{
+  "name": "redux-arena/ArenaSwitchMotion",
+  "private": true,
+  "main": "../lib/ArenaSwitchMotion/index.js",
+  "module": "../es/ArenaSwitchMotion/index.js",
+  "jsnext:main": "../es/ArenaSwitchMotion/index.js"
+}
