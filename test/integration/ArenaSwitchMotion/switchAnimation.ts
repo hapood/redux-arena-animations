@@ -1,4 +1,4 @@
-import { spring, presets, PlainStyle } from "react-motion";
+import { spring, presets } from "react-motion";
 import {
   AnimationPhases,
   InitMotionStyle,
@@ -29,8 +29,8 @@ export const initStyles: InitMotionStyle[] = [
 ];
 
 export const styleCalculators: StyleCalculators = {
-  container: (style: PlainStyle, phase: AnimationPhases) => style,
-  oldPlay: (style: PlainStyle, phase: AnimationPhases) => {
+  container: (style, phase) => style,
+  oldPlay: (style, phase) => {
     if (phase === AnimationPhases.IN) {
       return {
         left: 0,
@@ -48,7 +48,7 @@ export const styleCalculators: StyleCalculators = {
       };
     }
   },
-  newPlay: (style: PlainStyle, phase: AnimationPhases) => {
+  newPlay: (style, phase) => {
     if (phase === AnimationPhases.ENTERING) {
       return {
         opacity: spring(1, presets.stiff),
@@ -65,7 +65,7 @@ export const styleCalculators: StyleCalculators = {
 
 export const nextPhaseCheckers: NextPhaseCheckers = {
   container: () => false,
-  oldPlay: (style: PlainStyle) => {
+  oldPlay: style => {
     if (style.phase === AnimationPhases.LEAVING && style.opacity < 0.3) {
       return true;
     }
@@ -74,7 +74,7 @@ export const nextPhaseCheckers: NextPhaseCheckers = {
     }
     return false;
   },
-  newPlay: (style: PlainStyle) => {
+  newPlay: style => {
     if (style.phase === AnimationPhases.ENTERING && style.opacity === 1) {
       return true;
     }
@@ -83,7 +83,7 @@ export const nextPhaseCheckers: NextPhaseCheckers = {
 };
 
 export const numberToStyles: NumberToStyles = {
-  container: (style: PlainStyle, phase: AnimationPhases) => ({}),
-  oldPlay: (style: PlainStyle, phase: AnimationPhases) => ({}),
-  newPlay: (style: PlainStyle, phase: AnimationPhases) => ({})
+  container: (style, phase) => ({}),
+  oldPlay: (style, phase) => ({}),
+  newPlay: (style, phase) => ({})
 };
