@@ -3,7 +3,7 @@ import { TransitionMotion } from "react-motion";
 import AnimationPhases from "./AnimationPhases";
 import { calcKeys, buildStyleCalculator, isCurPhaseEnd } from "./utils";
 import {
-  ArenaSwitchAnimationConnectedProps,
+  ConnectedProps,
   State,
   ExtendedMotionStyle,
   CombinedStyleCalculator
@@ -18,7 +18,7 @@ export type InnerState = {
 };
 
 export default class ArenaSwitchAnimation extends React.Component<
-  ArenaSwitchAnimationConnectedProps,
+  ConnectedProps,
   InnerState
 > {
   componentWillMount() {
@@ -46,7 +46,7 @@ export default class ArenaSwitchAnimation extends React.Component<
     this.setState(state);
   }
 
-  componentWillReceiveProps(nextProps: ArenaSwitchAnimationConnectedProps) {
+  componentWillReceiveProps(nextProps: ConnectedProps) {
     let state: InnerState = Object.assign({}, this.state);
     if (nextProps.newPlayKey !== this.props.newPlayKey) {
       Object.assign(state, calcKeys(nextProps.newPlayKey));

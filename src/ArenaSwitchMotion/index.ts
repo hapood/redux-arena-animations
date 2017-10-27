@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import ArenaSwitchMotion from "./ArenaSwitchMotion";
 import actions from "./actions";
 import reducer from "./reducer";
-import { ArenaSwitchAnimationProps } from "./types";
+import { Props } from "./types";
 
 export default withRouter(
   bundleToComponent({
@@ -15,14 +15,15 @@ export default withRouter(
     options: {
       vReducerKey: "_arenaSwitchAnimation"
     }
-  } as SceneBundle<ArenaSwitchAnimationProps>)
-) as ComponentClass<ArenaSwitchAnimationProps>;
+  } as SceneBundle<Props>)
+) as ComponentClass<Props>;
 
 export {
   StyleCalculators,
   InitMotionStyle,
   NextPhaseCheckers,
-  NumberToStyles
+  NumberToStyles,
+  Props
 } from "./types";
 
 export { default as AnimationPhases } from "./AnimationPhases";

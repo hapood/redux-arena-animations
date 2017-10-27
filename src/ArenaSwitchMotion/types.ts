@@ -60,7 +60,7 @@ export type CombinedStyleCalculator = (
   prevStyles: ExtendedPlainMotionStyle[]
 ) => ExtendedMotionStyle[];
 
-export type ArenaSwitchAnimationProps = {
+export type Props = {
   children: ReactElement<{}>;
   initStyles: InitMotionStyle[];
   styleCalculators: StyleCalculators;
@@ -68,7 +68,7 @@ export type ArenaSwitchAnimationProps = {
   numberToStyles: NumberToStyles;
 };
 
-export type ArenaSwitchAnimationConnectedProps = {
+export type ConnectedProps = {
   actions: {
     setState: (state: State) => void;
     nextPhase: (
@@ -78,7 +78,7 @@ export type ArenaSwitchAnimationConnectedProps = {
     ) => void;
     playNext: (PlayStrategies?: PlayStrategies) => void;
   };
-} & ArenaSwitchAnimationProps &
+} & Props &
   State;
 
 export type PlayEntity = { element?: ReactElement<{}> | null | undefined };

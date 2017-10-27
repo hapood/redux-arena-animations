@@ -3,8 +3,7 @@ import { TransitionMotion } from "react-motion";
 import AnimationPhases from "./AnimationPhases";
 import { combineStyleCalculator, isCurPhaseEnd } from "./utils";
 import {
-  ArenaSceneLoadMotionProps,
-  ArenaSceneLoadMotionConnectedProps,
+  ConnectedProps,
   ExtendedMotionStyle,
   CombinedStyleCalculator
 } from "./types";
@@ -16,7 +15,7 @@ export type InnerState = {
 };
 
 export default class ArenaSceneLoadMotion extends React.Component<
-  ArenaSceneLoadMotionProps & ArenaSceneLoadMotionConnectedProps,
+  ConnectedProps,
   InnerState
 > {
   componentWillMount() {
@@ -42,9 +41,7 @@ export default class ArenaSceneLoadMotion extends React.Component<
     });
   }
 
-  componentWillReceiveProps(
-    nextProps: ArenaSceneLoadMotionProps & ArenaSceneLoadMotionConnectedProps
-  ) {
+  componentWillReceiveProps(nextProps: ConnectedProps) {
     let state: InnerState = Object.assign({}, this.state);
     if (
       this.props.bundle !== nextProps.bundle ||

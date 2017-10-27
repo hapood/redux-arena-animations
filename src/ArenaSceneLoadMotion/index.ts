@@ -5,7 +5,7 @@ import actions from "./actions";
 import saga from "./saga";
 import reducer from "./reducer";
 import state from "./state";
-import { State, ArenaSceneLoadMotionProps } from "./types";
+import { State, Props } from "./types";
 
 export default bundleToComponent({
   Component: ArenaSceneLoadMotion,
@@ -21,11 +21,12 @@ export default bundleToComponent({
   options: {
     vReducerKey: "_arenaSceneAnimation"
   }
-}) as SFC<ArenaSceneLoadMotionProps>;
+}) as SFC<Props>;
 
 export {
   StyleCalculators,
   NextPhaseCheckers,
   NumberToStyles,
-  InitMotionStyle
+  InitMotionStyle,
+  Props
 } from "./types";

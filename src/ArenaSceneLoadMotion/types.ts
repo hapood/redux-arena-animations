@@ -48,7 +48,7 @@ export type NumberToStyles = {
   scenePlay: NumberToStyle;
 };
 
-export type ArenaSceneLoadMotionProps = {
+export type Props = {
   loadingPlay: React.ReactElement<{}>;
   sceneBundleThunk: SceneBundleThunk;
   children: (bundle: SceneBundle) => React.ReactElement<{}>;
@@ -58,14 +58,15 @@ export type ArenaSceneLoadMotionProps = {
   numberToStyles: NumberToStyles;
 };
 
-export type ArenaSceneLoadMotionConnectedProps = {
+export type ConnectedProps = {
   actions: {
     setState: (state: State) => void;
     nextPhase: (phase: AnimationPhases) => void;
     startLeaving: () => void;
     loadSceneBundle: (sceneBundleThunk: SceneBundleThunk) => void;
   };
-} & State;
+} & Props &
+  State;
 
 export type State = {
   isSceneReady: boolean;
