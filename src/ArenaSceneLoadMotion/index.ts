@@ -30,3 +30,5 @@ export {
   InitMotionStyle,
   Props
 } from "./types";
+
+export { default as AnimationPhases } from "./AnimationPhases";
