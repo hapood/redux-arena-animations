@@ -5,8 +5,8 @@ const ts = require("typescript");
 const files = [
   "README.md",
   "LICENSE",
-  "subModules/ArenaSceneLoadMotion",
-  "subModules/ArenaSwitchMotion",
+  "subModules/SceneMotion",
+  "subModules/SwitchMotion",
 ];
 
 // make sure we're in the right folder

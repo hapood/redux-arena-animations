@@ -1,8 +1,8 @@
-import AnimationPhases from "./AnimationPhases";
+import Phases from "./Phases";
 import { State } from "./types";
 
 export default {
   isSceneReady: false,
-  phase: AnimationPhases.LOADING,
+  phase: Phases.LOADING,
   bundle: null
 } as State;

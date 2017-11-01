@@ -4,7 +4,7 @@ import { History } from "history";
 import { Provider } from "react-redux";
 import { Router, Switch } from "react-router-dom";
 import { ArenaRoute } from "redux-arena-router";
-import { ArenaSwitchMotion } from "src";
+import { SwitchMotion } from "src";
 import {
   initStyles,
   styleCalculators,
@@ -23,7 +23,7 @@ export default class TestHOC extends React.Component<TestHOCProps> {
     return (
       <Provider store={props.store}>
         <Router history={props.history}>
-          <ArenaSwitchMotion
+          <SwitchMotion
             initStyles={initStyles}
             styleCalculators={styleCalculators}
             numberToStyles={numberToStyles}
@@ -37,7 +37,7 @@ export default class TestHOC extends React.Component<TestHOCProps> {
                 <div />
               </ArenaRoute>
             </Switch>
-          </ArenaSwitchMotion>
+          </SwitchMotion>
         </Router>
       </Provider>
     );

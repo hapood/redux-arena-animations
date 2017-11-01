@@ -1,0 +1,7 @@
+{
+  "name": "redux-arena/SceneMotion",
+  "private": true,
+  "main": "../lib/SceneMotion/index.js",
+  "module": "../es/SceneMotion/index.js",
+  "jsnext:main": "../es/SceneMotion/index.js"
+}

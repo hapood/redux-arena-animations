@@ -6,13 +6,13 @@ import {
   PlainStyle
 } from "react-motion";
 import { SceneBundle, SceneBundleThunk } from "redux-arena";
-import AnimationPhases from "./AnimationPhases";
+import Phases from "./Phases";
 
 export type SceneBundleThunk = () => Promise<SceneBundle>;
 
 export type StyleCalculator = (
   style: PlainStyle,
-  phase: AnimationPhases
+  phase: Phases
 ) => Style;
 
 export type StyleCalculators = {
@@ -38,7 +38,7 @@ export interface InitMotionStyle extends TransitionPlainStyle {
 
 export type NumberToStyle = (
   style: PlainStyle,
-  phase: AnimationPhases,
+  phase: Phases,
   isSceneReady: boolean
 ) => { [key: string]: string };
 
@@ -58,19 +58,21 @@ export type Props = {
   numberToStyles: NumberToStyles;
 };
 
+export type Actions = {
+  setState: (state: State) => void;
+  nextPhase: (phase: Phases) => void;
+  startLeaving: () => void;
+  loadSceneBundle: (sceneBundleThunk: SceneBundleThunk) => void;
+};
+
 export type ConnectedProps = {
-  actions: {
-    setState: (state: State) => void;
-    nextPhase: (phase: AnimationPhases) => void;
-    startLeaving: () => void;
-    loadSceneBundle: (sceneBundleThunk: SceneBundleThunk) => void;
-  };
+  actions: Actions;
 } & Props &
   State;
 
 export type State = {
   isSceneReady: boolean;
-  phase: AnimationPhases;
+  phase: Phases;
   bundle: SceneBundle | null;
 };
 

@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import ArenaActionTypes from "redux-arena/ActionTypes";
 import ActionTypes from "./ActionTypes";
-import AnimationPhases from "./AnimationPhases";
+import Phases from "./Phases";
 import { State, PlayEntity } from "./types";
 import PlayStrategies from "./PlayStrategies";
 
@@ -13,7 +13,7 @@ export function setState(state: State) {
 }
 
 export function nextPhase(
-  phase: AnimationPhases,
+  phase: Phases,
   oldPlayKey: string,
   oldPlay: PlayEntity
 ) {

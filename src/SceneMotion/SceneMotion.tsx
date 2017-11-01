@@ -1,6 +1,6 @@
 import * as React from "react";
 import { TransitionMotion } from "react-motion";
-import AnimationPhases from "./AnimationPhases";
+import Phases from "./Phases";
 import { combineStyleCalculator, isCurPhaseEnd } from "./utils";
 import {
   ConnectedProps,
@@ -14,7 +14,7 @@ export type InnerState = {
   playElement: React.ReactElement<{}> | null;
 };
 
-export default class ArenaSceneLoadMotion extends React.Component<
+export default class SceneMotion extends React.Component<
   ConnectedProps,
   InnerState
 > {
@@ -24,7 +24,7 @@ export default class ArenaSceneLoadMotion extends React.Component<
       initStyles: (this.props.initStyles as ExtendedMotionStyle[]).concat([
         {
           key: "nextPhase",
-          style: { phase: AnimationPhases.LOADING }
+          style: { phase: Phases.LOADING }
         }
       ]),
       styleCalculator: combineStyleCalculator(
@@ -32,7 +32,7 @@ export default class ArenaSceneLoadMotion extends React.Component<
         this.props.phase,
         this.props.nextPhaseCheckers,
         this.props.isSceneReady,
-        (phase: AnimationPhases) =>
+        (phase: Phases) =>
           setImmediate(() => this.props.actions.nextPhase(phase))
       ),
       playElement: this.props.bundle
@@ -89,7 +89,7 @@ export default class ArenaSceneLoadMotion extends React.Component<
       <TransitionMotion defaultStyles={initStyles} styles={styleCalculator}>
         {interpolatedStyles => {
           let containerStyle, scenePlayStyle, loadingPlayStyle;
-          let animationPhase: AnimationPhases = (interpolatedStyles.find(
+          let phase: Phases = (interpolatedStyles.find(
             styleObj => styleObj.key === "nextPhase"
           ) as any).style.phase;
           interpolatedStyles.forEach(styleObj => {
@@ -98,21 +98,21 @@ export default class ArenaSceneLoadMotion extends React.Component<
               case "container":
                 containerStyle = numberToStyles.container(
                   style,
-                  animationPhase,
+                  phase,
                   isSceneReady
                 );
                 break;
               case "loadingPlay":
                 loadingPlayStyle = numberToStyles.loadingPlay(
                   style,
-                  animationPhase,
+                  phase,
                   isSceneReady
                 );
                 break;
               case "scenePlay":
                 scenePlayStyle = numberToStyles.scenePlay(
                   style,
-                  animationPhase,
+                  phase,
                   isSceneReady
                 );
                 break;

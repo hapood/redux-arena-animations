@@ -1,7 +1,7 @@
 import { AnyAction } from "redux";
 import initState from "./state";
 import ActionTypes from "./ActionTypes";
-import AnimationPhases from "./AnimationPhases";
+import Phases from "./Phases";
 import PlayStrategies from "./PlayStrategies";
 import { State, PlayEntity } from "./types";
 
@@ -11,13 +11,13 @@ function nextPhaseState(state: State, action: AnyAction) {
     oldPlayKey,
     oldPlay
   }: {
-    phase: AnimationPhases;
+    phase: Phases;
     oldPlayKey: "play1" | "play2";
     oldPlay: PlayEntity;
   } = action as any;
   if (state.phase !== phase || state[oldPlayKey] !== oldPlay) return state;
   switch (state.phase) {
-    case AnimationPhases.ENTERING:
+    case Phases.ENTERING:
       let newPlayKey;
       if (state.newPlayKey === "play2") {
         newPlayKey = "play1";
@@ -25,14 +25,14 @@ function nextPhaseState(state: State, action: AnyAction) {
         newPlayKey = "play2";
       }
       return Object.assign({}, state, {
-        phase: AnimationPhases.IN,
+        phase: Phases.IN,
         [newPlayKey]: {},
         newPlayKey
       });
-    case AnimationPhases.LEAVING:
-      return Object.assign({}, state, { phase: AnimationPhases.OUT });
-    case AnimationPhases.OUT:
-      return Object.assign({}, state, { phase: AnimationPhases.ENTERING });
+    case Phases.LEAVING:
+      return Object.assign({}, state, { phase: Phases.OUT });
+    case Phases.OUT:
+      return Object.assign({}, state, { phase: Phases.ENTERING });
     default:
       return state;
   }
@@ -41,10 +41,10 @@ function nextPhaseState(state: State, action: AnyAction) {
 function playRemoveState(state: State, action: AnyAction) {
   let oldPlayKey = state.newPlayKey === "play1" ? "play2" : "play1";
   if (
-    state.phase == AnimationPhases.IN &&
+    state.phase == Phases.IN &&
     (state as any)[oldPlayKey] === action.element
   ) {
-    return Object.assign({}, state, { phase: AnimationPhases.LEAVING });
+    return Object.assign({}, state, { phase: Phases.LEAVING });
   } else if (state[state.newPlayKey].element === action.element) {
     return Object.assign({}, state, { autoClearPlay: action.element });
   } else {
@@ -64,10 +64,10 @@ export default function(state = initState, action: AnyAction) {
       if (state.playlist.length === 0 && state.autoClearPlay == null)
         return state;
       let newState = Object.assign({}, state);
-      if (state.phase === AnimationPhases.IN) {
-        newState.phase = AnimationPhases.LEAVING;
+      if (state.phase === Phases.IN) {
+        newState.phase = Phases.LEAVING;
       } else if (
-        state.phase === AnimationPhases.OUT &&
+        state.phase === Phases.OUT &&
         state.autoClearPlay != null
       ) {
         newState.autoClearPlay = null;
@@ -76,7 +76,7 @@ export default function(state = initState, action: AnyAction) {
       }
       if (state.playlist.length > 0) {
         if (state.play1.element == null && state.play2.element == null) {
-          newState.phase = AnimationPhases.OUT;
+          newState.phase = Phases.OUT;
         }
         switch (action.PlayStrategies) {
           case PlayStrategies.PLAT_NEXT:

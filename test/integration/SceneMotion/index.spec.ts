@@ -21,7 +21,7 @@ function selectAnimationState(allStates: any): any {
   return animationState;
 }
 
-describe("<ArenaSceneLoadMotion /> integration", () => {
+describe("<SceneMotion /> integration", () => {
   let store: EnhancedStore,
     mount: MountBundleThunk,
     cleanUp: () => void,

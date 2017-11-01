@@ -1,10 +1,7 @@
 import * as React from "react";
 import { Provider } from "react-redux";
-import {
-  ArenaSceneLoadMotion,
-  EnhancedStore,
-  SceneBundleThunk
-} from "redux-arena";
+import { SceneMotion } from "src";
+import { EnhancedStore, SceneBundleThunk } from "redux-arena";
 import { bundleToElement } from "redux-arena/tools";
 import * as sceneAnimation from "./sceneAnimation";
 
@@ -20,7 +17,7 @@ export default class TestHOC extends React.Component<TestHOCProps> {
     let props = this.props;
     return (
       <Provider store={props.store}>
-        <ArenaSceneLoadMotion
+        <SceneMotion
           sceneBundleThunk={props.sceneBundleThunk}
           loadingPlay={<div />}
           initStyles={sceneAnimation.initStyles}
@@ -34,7 +31,7 @@ export default class TestHOC extends React.Component<TestHOCProps> {
                 options: { reducerKey: "bundle" }
               })
             )}
-        </ArenaSceneLoadMotion>
+        </SceneMotion>
       </Provider>
     );
   }

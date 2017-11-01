@@ -2,7 +2,7 @@ import { ReactWrapper } from "enzyme";
 import { expect } from "chai";
 import { spy } from "sinon";
 import createSwitchMotionMounter from "./createSwitchMotionMounter";
-import { AnimationPhases } from "src/ArenaSwitchMotion";
+import { Phases } from "src/SwitchMotion";
 import { createArenaStore, EnhancedStore } from "redux-arena";
 import { History } from "history";
 import createHistory from "history/createBrowserHistory";
@@ -37,7 +37,7 @@ describe("<ArenaSceneMotion /> integration", () => {
   });
 
   it("should loop phase correctly", () => {
-    let queue = [AnimationPhases.OUT, AnimationPhases.IN];
+    let queue = [Phases.OUT, Phases.IN];
     wrapper = mount(store, history);
     let flagPromise = new Promise(resolve => {
       let unsubscribe = store.subscribe(() => {

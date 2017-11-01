@@ -1,11 +1,11 @@
 import { spring, presets } from "react-motion";
 import {
-  AnimationPhases,
+  Phases,
   InitMotionStyle,
   StyleCalculators,
   NextPhaseCheckers,
   NumberToStyles
-} from "src/ArenaSwitchMotion";
+} from "src/SwitchMotion";
 
 export const initStyles: InitMotionStyle[] = [
   {
@@ -31,12 +31,12 @@ export const initStyles: InitMotionStyle[] = [
 export const styleCalculators: StyleCalculators = {
   container: (style, phase) => style,
   oldPlay: (style, phase) => {
-    if (phase === AnimationPhases.IN) {
+    if (phase === Phases.IN) {
       return {
         left: 0,
         opacity: 1
       };
-    } else if (phase === AnimationPhases.LEAVING) {
+    } else if (phase === Phases.LEAVING) {
       return {
         opacity: spring(0, presets.stiff),
         left: spring(-15, presets.stiff)
@@ -49,7 +49,7 @@ export const styleCalculators: StyleCalculators = {
     }
   },
   newPlay: (style, phase) => {
-    if (phase === AnimationPhases.ENTERING) {
+    if (phase === Phases.ENTERING) {
       return {
         opacity: spring(1, presets.stiff),
         left: spring(0, presets.stiff)
@@ -66,16 +66,16 @@ export const styleCalculators: StyleCalculators = {
 export const nextPhaseCheckers: NextPhaseCheckers = {
   container: () => false,
   oldPlay: style => {
-    if (style.phase === AnimationPhases.LEAVING && style.opacity < 0.3) {
+    if (style.phase === Phases.LEAVING && style.opacity < 0.3) {
       return true;
     }
-    if (style.phase === AnimationPhases.OUT) {
+    if (style.phase === Phases.OUT) {
       return true;
     }
     return false;
   },
   newPlay: style => {
-    if (style.phase === AnimationPhases.ENTERING && style.opacity === 1) {
+    if (style.phase === Phases.ENTERING && style.opacity === 1) {
       return true;
     }
     return false;

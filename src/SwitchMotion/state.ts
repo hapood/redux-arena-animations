@@ -1,4 +1,4 @@
-import AnimationPhases from "./AnimationPhases";
+import Phases from "./Phases";
 import { State } from "./types";
 export default {
   play1: { element: null },
@@ -6,5 +6,5 @@ export default {
   newPlayKey: "play2",
   playlist: [],
   autoClearPlay: null,
-  phase: AnimationPhases.IN
+  phase: Phases.IN
 } as State;

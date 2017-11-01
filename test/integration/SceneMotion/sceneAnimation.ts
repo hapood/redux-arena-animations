@@ -1,11 +1,11 @@
 import { spring, presets } from "react-motion";
 import {
-  LoadMotionPhase,
+  Phases,
   StyleCalculators,
   NextPhaseCheckers,
   NumberToStyles,
   InitMotionStyle
-} from "redux-arena";
+} from "src/SceneMotion";
 
 export const initStyles: InitMotionStyle[] = [
   {
@@ -28,7 +28,7 @@ export const styleCalculators: StyleCalculators = {
   container: (style, phase) => style,
   loadingPlay: (style, phase) => style,
   scenePlay: (style, phase) => {
-    if (phase === LoadMotionPhase.LOADING) {
+    if (phase === Phases.LOADING) {
       return {
         opacity: 0
       };
@@ -43,17 +43,12 @@ export const styleCalculators: StyleCalculators = {
 export const nextPhaseCheckers: NextPhaseCheckers = {
   container: () => false,
   loadingPlay: (style, isSceneReady) => {
-    if (style.phase === LoadMotionPhase.LOADING && isSceneReady === true)
-      return true;
+    if (style.phase === Phases.LOADING && isSceneReady === true) return true;
     return false;
   },
   scenePlay: style => {
-    if (style.phase === LoadMotionPhase.ENTERING && style.opacity === 1)
-      return true;
-    if (
-      style.phase !== LoadMotionPhase.LOADING &&
-      style.phase !== LoadMotionPhase.ENTERING
-    ) {
+    if (style.phase === Phases.ENTERING && style.opacity === 1) return true;
+    if (style.phase !== Phases.LOADING && style.phase !== Phases.ENTERING) {
       return true;
     }
     return false;

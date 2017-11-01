@@ -1,6 +1,6 @@
 import * as React from "react";
 import { TransitionMotion } from "react-motion";
-import AnimationPhases from "./AnimationPhases";
+import Phases from "./Phases";
 import { calcKeys, buildStyleCalculator, isCurPhaseEnd } from "./utils";
 import {
   ConnectedProps,
@@ -26,7 +26,7 @@ export default class ArenaSwitchAnimation extends React.Component<
     let state = {
       initStyles: (this.props.initStyles as ExtendedMotionStyle[]).concat({
         key: "nextPhase",
-        style: { phase: AnimationPhases.IN }
+        style: { phase: Phases.IN }
       })
     } as InnerState;
     Object.assign(state, calcKeys(this.props.newPlayKey));
@@ -82,12 +82,12 @@ export default class ArenaSwitchAnimation extends React.Component<
     }
     this.setState(state);
     if (
-      nextProps.phase === AnimationPhases.IN &&
+      nextProps.phase === Phases.IN &&
       nextProps.playlist.length > 0
     ) {
       nextProps.actions.playNext();
     } else if (
-      nextProps.phase === AnimationPhases.OUT &&
+      nextProps.phase === Phases.OUT &&
       nextProps.autoClearPlay
     ) {
       nextProps.actions.playNext();
@@ -101,7 +101,7 @@ export default class ArenaSwitchAnimation extends React.Component<
       <TransitionMotion defaultStyles={initStyles} styles={styleCalculator}>
         {interpolatedStyles => {
           let containerStyle, newPlayStyle, oldPlayStyle;
-          let animationPhase: AnimationPhases = (interpolatedStyles.find(
+          let phase: Phases = (interpolatedStyles.find(
             styleObj => styleObj.key === "nextPhase"
           ) as any).style.phase;
           interpolatedStyles.forEach(styleObj => {
@@ -124,7 +124,7 @@ export default class ArenaSwitchAnimation extends React.Component<
               <div key={oldPlayKey} style={oldPlayStyle}>
                 {this.props[oldPlayKey].element}
               </div>
-              {animationPhase === AnimationPhases.IN ? null : (
+              {phase === Phases.IN ? null : (
                 <div key={newPlayKey} style={newPlayStyle}>
                   {this.props[newPlayKey].element}
                 </div>

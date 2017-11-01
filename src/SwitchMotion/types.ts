@@ -6,12 +6,12 @@ import {
   Style,
   PlainStyle
 } from "react-motion";
-import AnimationPhases from "./AnimationPhases";
+import Phases from "./Phases";
 import PlayStrategies from "./PlayStrategies";
 
 export type StyleCalculator = (
   style: PlainStyle,
-  phase: AnimationPhases
+  phase: Phases
 ) => Style;
 
 export type StyleCalculators = {
@@ -27,7 +27,7 @@ export interface InitMotionStyle extends TransitionPlainStyle {
 
 export type NumberToStyle = (
   style: PlainStyle,
-  phase: AnimationPhases
+  phase: Phases
 ) => { [key: string]: string };
 
 export type NumberToStyles = {
@@ -68,16 +68,18 @@ export type Props = {
   numberToStyles: NumberToStyles;
 };
 
+export type Actions = {
+  setState: (state: State) => void;
+  nextPhase: (
+    phase: Phases,
+    oldPlayKey: string,
+    oldPlay: PlayEntity
+  ) => void;
+  playNext: (PlayStrategies?: PlayStrategies) => void;
+};
+
 export type ConnectedProps = {
-  actions: {
-    setState: (state: State) => void;
-    nextPhase: (
-      phase: AnimationPhases,
-      oldPlayKey: string,
-      oldPlay: PlayEntity
-    ) => void;
-    playNext: (PlayStrategies?: PlayStrategies) => void;
-  };
+  actions: Actions;
 } & Props &
   State;
 
@@ -89,5 +91,5 @@ export type State = {
   newPlayKey: "play1" | "play2";
   playlist: Array<PlayEntity>;
   autoClearPlay: PlayEntity | null;
-  phase: AnimationPhases;
+  phase: Phases;
 };
