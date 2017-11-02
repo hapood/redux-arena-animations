@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactNode } from "react";
 import ArenaActionTypes from "redux-arena/ActionTypes";
 import ActionTypes from "./ActionTypes";
 import Phases from "./Phases";
@@ -25,19 +25,19 @@ export function nextPhase(
   };
 }
 
-export function addPlay(element: ReactElement<{}>) {
+export function addPlay(node: ReactNode) {
   return {
     type: ActionTypes.ARENA_SWITCH_ANIMATION_PLAY_ADD,
     entity: {
-      element
+      node
     }
   };
 }
 
-export function removePlay(element: ReactElement<{}>) {
+export function removePlay(node: ReactNode) {
   return {
     type: ActionTypes.ARENA_SWITCH_ANIMATION_PLAY_REMOVE,
-    element
+    node
   };
 }
 

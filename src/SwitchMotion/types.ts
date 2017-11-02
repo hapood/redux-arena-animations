@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactNode } from "react";
 import {
   SpringHelperConfig,
   TransitionPlainStyle,
@@ -9,10 +9,7 @@ import {
 import Phases from "./Phases";
 import PlayStrategies from "./PlayStrategies";
 
-export type StyleCalculator = (
-  style: PlainStyle,
-  phase: Phases
-) => Style;
+export type StyleCalculator = (style: PlainStyle, phase: Phases) => Style;
 
 export type StyleCalculators = {
   container: StyleCalculator;
@@ -61,7 +58,7 @@ export type CombinedStyleCalculator = (
 ) => ExtendedMotionStyle[];
 
 export type Props = {
-  children: ReactElement<{}>;
+  children: ReactNode;
   initStyles: InitMotionStyle[];
   styleCalculators: StyleCalculators;
   nextPhaseCheckers: NextPhaseCheckers;
@@ -70,11 +67,7 @@ export type Props = {
 
 export type Actions = {
   setState: (state: State) => void;
-  nextPhase: (
-    phase: Phases,
-    oldPlayKey: string,
-    oldPlay: PlayEntity
-  ) => void;
+  nextPhase: (phase: Phases, oldPlayKey: string, oldPlay: PlayEntity) => void;
   playNext: (PlayStrategies?: PlayStrategies) => void;
 };
 
@@ -83,7 +76,7 @@ export type ConnectedProps = {
 } & Props &
   State;
 
-export type PlayEntity = { element?: ReactElement<{}> | null | undefined };
+export type PlayEntity = { node?: ReactNode };
 
 export type State = {
   play1: PlayEntity;

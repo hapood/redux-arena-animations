@@ -11,7 +11,7 @@ import {
 export type InnerState = {
   initStyles: ExtendedMotionStyle[];
   styleCalculator: CombinedStyleCalculator;
-  playElement: React.ReactElement<{}> | null;
+  playNode: React.ReactNode;
 };
 
 export default class SceneMotion extends React.Component<
@@ -35,7 +35,7 @@ export default class SceneMotion extends React.Component<
         (phase: Phases) =>
           setImmediate(() => this.props.actions.nextPhase(phase))
       ),
-      playElement: this.props.bundle
+      playNode: this.props.bundle
         ? this.props.children(this.props.bundle)
         : null
     });
@@ -47,7 +47,7 @@ export default class SceneMotion extends React.Component<
       this.props.bundle !== nextProps.bundle ||
       this.props.children !== nextProps.children
     ) {
-      state.playElement = nextProps.bundle
+      state.playNode = nextProps.bundle
         ? nextProps.children(nextProps.bundle)
         : null;
     }
@@ -124,7 +124,7 @@ export default class SceneMotion extends React.Component<
                 {this.props.loadingPlay}
               </div>
               <div key="scenePlay" style={scenePlayStyle}>
-                {this.state.playElement}
+                {this.state.playNode}
               </div>
             </div>
           );

@@ -49,9 +49,9 @@ export type NumberToStyles = {
 };
 
 export type Props = {
-  loadingPlay: React.ReactElement<{}>;
+  loadingPlay: React.ReactNode;
   sceneBundleThunk: SceneBundleThunk;
-  children: (bundle: SceneBundle) => React.ReactElement<{}>;
+  children: (bundle: SceneBundle) => React.ReactNode;
   initStyles: InitMotionStyle[];
   styleCalculators: StyleCalculators;
   nextPhaseCheckers: NextPhaseCheckers;

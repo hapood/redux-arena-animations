@@ -42,15 +42,15 @@ function playRemoveState(state: State, action: AnyAction) {
   let oldPlayKey = state.newPlayKey === "play1" ? "play2" : "play1";
   if (
     state.phase == Phases.IN &&
-    (state as any)[oldPlayKey] === action.element
+    (state as any)[oldPlayKey] === action.node
   ) {
     return Object.assign({}, state, { phase: Phases.LEAVING });
-  } else if (state[state.newPlayKey].element === action.element) {
-    return Object.assign({}, state, { autoClearPlay: action.element });
+  } else if (state[state.newPlayKey].node === action.node) {
+    return Object.assign({}, state, { autoClearPlay: action.node });
   } else {
     return Object.assign({}, state, {
       playlist: state.playlist.filter(
-        entity => entity.element !== action.element
+        entity => entity.node !== action.node
       )
     });
   }
@@ -75,7 +75,7 @@ export default function(state = initState, action: AnyAction) {
         return state;
       }
       if (state.playlist.length > 0) {
-        if (state.play1.element == null && state.play2.element == null) {
+        if (state.play1.node == null && state.play2.node == null) {
           newState.phase = Phases.OUT;
         }
         switch (action.PlayStrategies) {

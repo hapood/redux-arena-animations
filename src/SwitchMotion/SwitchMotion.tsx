@@ -12,7 +12,7 @@ import {
 export type InnerState = {
   initStyles: ExtendedMotionStyle[];
   styleCalculator: CombinedStyleCalculator;
-  playElement: React.ReactElement<{}> | null;
+  playNode: React.ReactNode;
   oldPlayKey: "play1" | "play2";
   newPlayKey: "play1" | "play2";
 };
@@ -81,15 +81,9 @@ export default class ArenaSwitchAnimation extends React.Component<
       );
     }
     this.setState(state);
-    if (
-      nextProps.phase === Phases.IN &&
-      nextProps.playlist.length > 0
-    ) {
+    if (nextProps.phase === Phases.IN && nextProps.playlist.length > 0) {
       nextProps.actions.playNext();
-    } else if (
-      nextProps.phase === Phases.OUT &&
-      nextProps.autoClearPlay
-    ) {
+    } else if (nextProps.phase === Phases.OUT && nextProps.autoClearPlay) {
       nextProps.actions.playNext();
     }
   }
@@ -122,11 +116,11 @@ export default class ArenaSwitchAnimation extends React.Component<
             <div style={containerStyle}>
               {this.props.children}
               <div key={oldPlayKey} style={oldPlayStyle}>
-                {this.props[oldPlayKey].element}
+                {this.props[oldPlayKey].node}
               </div>
               {phase === Phases.IN ? null : (
                 <div key={newPlayKey} style={newPlayStyle}>
-                  {this.props[newPlayKey].element}
+                  {this.props[newPlayKey].node}
                 </div>
               )}
             </div>
