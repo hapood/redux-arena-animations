@@ -1,6 +1,6 @@
 import * as React from "react";
 import { createMount } from "../../testUtils";
-import { EnhancedStore, SceneBundleThunk } from "redux-arena";
+import { EnhancedStore } from "redux-arena";
 import { History } from "history";
 import TestHOC from "./TestHOC";
 import { MountSwitchMotion } from "./types";

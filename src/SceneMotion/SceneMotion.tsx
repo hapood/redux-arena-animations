@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TransitionMotion } from "react-motion";
+import { TransitionMotion, TransitionPlainStyle } from "react-motion";
 import Phases from "./Phases";
 import { combineStyleCalculator, isCurPhaseEnd } from "./utils";
 import {
@@ -21,12 +21,10 @@ export default class SceneMotion extends React.Component<
   componentWillMount() {
     this.props.actions.loadSceneBundle(this.props.sceneBundleThunk);
     this.setState({
-      initStyles: (this.props.initStyles as ExtendedMotionStyle[]).concat([
-        {
-          key: "nextPhase",
-          style: { phase: Phases.LOADING }
-        }
-      ]),
+      initStyles: (this.props.initStyles as any).concat({
+        key: "nextPhase",
+        style: { phase: Phases.LOADING }
+      }),
       styleCalculator: combineStyleCalculator(
         this.props.styleCalculators,
         this.props.phase,
@@ -85,9 +83,10 @@ export default class SceneMotion extends React.Component<
   render() {
     let { phase, numberToStyles, isSceneReady } = this.props;
     let { initStyles, styleCalculator } = this.state;
+    let TransitionMotionA = TransitionMotion as any;
     return (
-      <TransitionMotion defaultStyles={initStyles} styles={styleCalculator}>
-        {interpolatedStyles => {
+      <TransitionMotionA defaultStyles={initStyles} styles={styleCalculator}>
+        {(interpolatedStyles: TransitionPlainStyle[]) => {
           let containerStyle, scenePlayStyle, loadingPlayStyle;
           let phase: Phases = (interpolatedStyles.find(
             styleObj => styleObj.key === "nextPhase"
@@ -129,7 +128,7 @@ export default class SceneMotion extends React.Component<
             </div>
           );
         }}
-      </TransitionMotion>
+      </TransitionMotionA>
     );
   }
 }

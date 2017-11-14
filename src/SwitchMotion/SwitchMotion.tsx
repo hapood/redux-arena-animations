@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TransitionMotion } from "react-motion";
+import { TransitionMotion, TransitionPlainStyle } from "react-motion";
 import Phases from "./Phases";
 import { calcKeys, buildStyleCalculator, isCurPhaseEnd } from "./utils";
 import {
@@ -91,9 +91,10 @@ export default class ArenaSwitchAnimation extends React.Component<
   render() {
     let { phase, numberToStyles } = this.props;
     let { newPlayKey, oldPlayKey, initStyles, styleCalculator } = this.state;
+    let TransitionMotionA = TransitionMotion as any;
     return (
-      <TransitionMotion defaultStyles={initStyles} styles={styleCalculator}>
-        {interpolatedStyles => {
+      <TransitionMotionA defaultStyles={initStyles} styles={styleCalculator}>
+        {(interpolatedStyles: TransitionPlainStyle[]) => {
           let containerStyle, newPlayStyle, oldPlayStyle;
           let phase: Phases = (interpolatedStyles.find(
             styleObj => styleObj.key === "nextPhase"
@@ -126,7 +127,7 @@ export default class ArenaSwitchAnimation extends React.Component<
             </div>
           );
         }}
-      </TransitionMotion>
+      </TransitionMotionA>
     );
   }
 }

@@ -1,15 +1,11 @@
 import { ReactWrapper } from "enzyme";
 import { expect } from "chai";
 import { spy } from "sinon";
-import {
-  createArenaStore,
-  LoadMotionPhase,
-  EnhancedStore,
-  SceneBundleThunk
-} from "redux-arena";
+import { createArenaStore, EnhancedStore } from "redux-arena";
 import { MountBundleThunk } from "./types";
 import TestHOC from "./TestHOC";
 import createBundleThunkMounter from "./createBundleThunkMounter";
+import { Phases } from "src/SceneMotion";
 
 function selectAnimationState(allStates: any): any {
   let animationState;
@@ -42,7 +38,7 @@ describe("<SceneMotion /> integration", () => {
     let flagPromise = new Promise(resolve => {
       let unsubscribe = store.subscribe(() => {
         let animationState = selectAnimationState(store.getState());
-        if (animationState && animationState.phase === LoadMotionPhase.IN) {
+        if (animationState && animationState.phase === Phases.IN) {
           unsubscribe();
           resolve(true);
         }

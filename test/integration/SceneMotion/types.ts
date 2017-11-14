@@ -1,5 +1,6 @@
 import { ReactWrapper } from "enzyme";
-import { EnhancedStore, SceneBundle, SceneBundleThunk } from "redux-arena";
+import { EnhancedStore, SceneBundle } from "redux-arena";
+import { SceneBundleThunk } from "src/SceneMotion";
 
 export type MountBundleThunk = (
   store: EnhancedStore,

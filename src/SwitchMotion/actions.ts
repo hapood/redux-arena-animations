@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import ArenaActionTypes from "redux-arena/ActionTypes";
 import ActionTypes from "./ActionTypes";
 import Phases from "./Phases";
-import { State, PlayEntity } from "./types";
+import { State, PlayEntity, Actions } from "./types";
 import PlayStrategies from "./PlayStrategies";
 
 export function setState(state: State) {
@@ -48,4 +48,10 @@ export function playNext(PlayStrategies?: PlayStrategies) {
   };
 }
 
-export default { setState, nextPhase, addPlay, removePlay, playNext };
+export default {
+  setState,
+  nextPhase,
+  addPlay,
+  removePlay,
+  playNext
+} as Actions;

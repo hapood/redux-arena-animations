@@ -3,7 +3,7 @@ import { EnhancedStore } from "redux-arena";
 import { History } from "history";
 import { Provider } from "react-redux";
 import { Router, Switch } from "react-router-dom";
-import { ArenaRoute } from "redux-arena-router";
+import { Route } from "redux-arena-router";
 import { SwitchMotion } from "src";
 import {
   initStyles,
@@ -20,26 +20,29 @@ export type TestHOCProps = {
 export default class TestHOC extends React.Component<TestHOCProps> {
   render() {
     let props = this.props;
+    let ProviderA = Provider as any;
+    let RouterA = Router as any;
+    let SwitchA = Switch as any;
     return (
-      <Provider store={props.store}>
-        <Router history={props.history}>
+      <ProviderA store={props.store}>
+        <RouterA history={props.history}>
           <SwitchMotion
             initStyles={initStyles}
             styleCalculators={styleCalculators}
             numberToStyles={numberToStyles}
             nextPhaseCheckers={nextPhaseCheckers}
           >
-            <Switch>
-              <ArenaRoute key="1" path="/pageA">
+            <SwitchA>
+              <Route key="1" path="/pageA">
                 <div />
-              </ArenaRoute>
-              <ArenaRoute key="2" path="/pageB">
+              </Route>
+              <Route key="2" path="/pageB">
                 <div />
-              </ArenaRoute>
-            </Switch>
+              </Route>
+            </SwitchA>
           </SwitchMotion>
-        </Router>
-      </Provider>
+        </RouterA>
+      </ProviderA>
     );
   }
 }

@@ -4,11 +4,11 @@ import ActionTypes from "./ActionTypes";
 import Phases from "./Phases";
 import { SceneBundleThunk } from "./types";
 /**
- * The asynchronous loading function of the scene, 
+ * The asynchronous loading function of the scene,
  * and finally the synchronous load function
- * 
- * @param {any} { arenaReducerDict, asyncSceneBundle } 
- * @returns 
+ *
+ * @param {any} { arenaReducerDict, asyncSceneBundle }
+ * @returns
  */
 function* loadSceneBundle({
   sceneBundleThunk

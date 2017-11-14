@@ -5,15 +5,12 @@ import {
   Style,
   PlainStyle
 } from "react-motion";
-import { SceneBundle, SceneBundleThunk } from "redux-arena";
+import { SceneBundle } from "redux-arena";
 import Phases from "./Phases";
 
-export type SceneBundleThunk = () => Promise<SceneBundle>;
+export type SceneBundleThunk = () => Promise<SceneBundle<{}, {}, {}, {}>>;
 
-export type StyleCalculator = (
-  style: PlainStyle,
-  phase: Phases
-) => Style;
+export type StyleCalculator = (style: PlainStyle, phase: Phases) => Style;
 
 export type StyleCalculators = {
   container: StyleCalculator;
@@ -51,7 +48,7 @@ export type NumberToStyles = {
 export type Props = {
   loadingPlay: React.ReactNode;
   sceneBundleThunk: SceneBundleThunk;
-  children: (bundle: SceneBundle) => React.ReactNode;
+  children: (bundle: SceneBundle<{}, {}, {}, {}>) => React.ReactNode;
   initStyles: InitMotionStyle[];
   styleCalculators: StyleCalculators;
   nextPhaseCheckers: NextPhaseCheckers;
@@ -73,7 +70,7 @@ export type ConnectedProps = {
 export type State = {
   isSceneReady: boolean;
   phase: Phases;
-  bundle: SceneBundle | null;
+  bundle: SceneBundle<{}, {}, {}, {}> | null;
 };
 
 export type ExtendedStyleKeys = StyleKeys | "nextPhase";

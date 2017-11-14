@@ -1,4 +1,5 @@
 import { AnyAction } from "redux";
+import { SceneReducer } from "redux-arena";
 import initState from "./state";
 import ActionTypes from "./ActionTypes";
 import Phases from "./Phases";
@@ -40,23 +41,18 @@ function nextPhaseState(state: State, action: AnyAction) {
 
 function playRemoveState(state: State, action: AnyAction) {
   let oldPlayKey = state.newPlayKey === "play1" ? "play2" : "play1";
-  if (
-    state.phase == Phases.IN &&
-    (state as any)[oldPlayKey] === action.node
-  ) {
+  if (state.phase == Phases.IN && (state as any)[oldPlayKey] === action.node) {
     return Object.assign({}, state, { phase: Phases.LEAVING });
   } else if (state[state.newPlayKey].node === action.node) {
     return Object.assign({}, state, { autoClearPlay: action.node });
   } else {
     return Object.assign({}, state, {
-      playlist: state.playlist.filter(
-        entity => entity.node !== action.node
-      )
+      playlist: state.playlist.filter(entity => entity.node !== action.node)
     });
   }
 }
 
-export default function(state = initState, action: AnyAction) {
+function reducer(state = initState, action: AnyAction) {
   switch (action.type) {
     case ActionTypes.ARENA_SWITCH_ANIMATION_NEXTPHRASE:
       return nextPhaseState(state, action);
@@ -66,10 +62,7 @@ export default function(state = initState, action: AnyAction) {
       let newState = Object.assign({}, state);
       if (state.phase === Phases.IN) {
         newState.phase = Phases.LEAVING;
-      } else if (
-        state.phase === Phases.OUT &&
-        state.autoClearPlay != null
-      ) {
+      } else if (state.phase === Phases.OUT && state.autoClearPlay != null) {
         newState.autoClearPlay = null;
       } else {
         return state;
@@ -99,3 +92,5 @@ export default function(state = initState, action: AnyAction) {
       return state;
   }
 }
+
+export default reducer as SceneReducer<State>;
