@@ -31,8 +31,7 @@ export default class TestHOC extends React.Component<TestHOCProps> {
             bundleToElement(
               Object.assign({}, bundle, {
                 options: { reducerKey: "bundle" }
-              }),
-              {}
+              })
             )
           }
         </SceneMotion>
