@@ -1,6 +1,6 @@
 {
   "name": "redux-arena-animations",
-  "version": "0.1.0-rc-2",
+  "version": "0.1.0-rc-3",
   "description": "High order components for redux-arena",
   "scripts": {
     "prettier": "prettier --write \"**/*.js\" \"**/*.jsx\" \"**/*.tsx\" \"**/*.ts\"",

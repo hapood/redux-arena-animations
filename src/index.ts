@@ -6,7 +6,8 @@ export {
   NextPhaseCheckers as SceneNextPhaseCheckers,
   NumberToStyles as SceneNumberToStyles,
   InitMotionStyle as SceneInitMotionStyle,
-  SceneBundleThunk
+  SceneBundleThunk,
+  Phases as SceneMotionPhases
 } from "./SceneMotion";
 export {
   default as SwitchMotion,
@@ -15,5 +16,6 @@ export {
   StyleCalculators as SwitchStyleCalculators,
   InitMotionStyle as SwitchInitMotionStyle,
   NextPhaseCheckers as SwitchPhaseCheckers,
-  NumberToStyles as SwitchNumberToStyles
+  NumberToStyles as SwitchNumberToStyles,
+  Phases as SwitchMotionPhases
 } from "./SwitchMotion";
