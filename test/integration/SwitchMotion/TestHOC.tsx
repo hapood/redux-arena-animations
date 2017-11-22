@@ -20,29 +20,26 @@ export type TestHOCProps = {
 export default class TestHOC extends React.Component<TestHOCProps> {
   render() {
     let props = this.props;
-    let ProviderA = Provider as any;
-    let RouterA = Router as any;
-    let SwitchA = Switch as any;
     return (
-      <ProviderA store={props.store}>
-        <RouterA history={props.history}>
+      <Provider store={props.store}>
+        <Router history={props.history}>
           <SwitchMotion
             initStyles={initStyles}
             styleCalculators={styleCalculators}
             numberToStyles={numberToStyles}
             nextPhaseCheckers={nextPhaseCheckers}
           >
-            <SwitchA>
+            <Switch>
               <Route key="1" path="/pageA">
                 <div />
               </Route>
               <Route key="2" path="/pageB">
                 <div />
               </Route>
-            </SwitchA>
+            </Switch>
           </SwitchMotion>
-        </RouterA>
-      </ProviderA>
+        </Router>
+      </Provider>
     );
   }
 }

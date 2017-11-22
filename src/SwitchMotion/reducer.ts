@@ -6,16 +6,15 @@ import Phases from "./Phases";
 import PlayStrategies from "./PlayStrategies";
 import { State, PlayEntity } from "./types";
 
-function nextPhaseState(state: State, action: AnyAction) {
-  let {
-    phase,
-    oldPlayKey,
-    oldPlay
-  }: {
+function nextPhaseState(
+  state: State,
+  action: {
     phase: Phases;
     oldPlayKey: "play1" | "play2";
     oldPlay: PlayEntity;
-  } = action as any;
+  }
+) {
+  let { phase, oldPlayKey, oldPlay } = action;
   if (state.phase !== phase || state[oldPlayKey] !== oldPlay) return state;
   switch (state.phase) {
     case Phases.ENTERING:
@@ -55,7 +54,7 @@ function playRemoveState(state: State, action: AnyAction) {
 function reducer(state = initState, action: AnyAction) {
   switch (action.type) {
     case ActionTypes.ARENA_SWITCH_ANIMATION_NEXTPHRASE:
-      return nextPhaseState(state, action);
+      return nextPhaseState(state, action as any);
     case ActionTypes.ARENA_SWITCH_ANIMATION_PLAY_NEXT:
       if (state.playlist.length === 0 && state.autoClearPlay == null)
         return state;

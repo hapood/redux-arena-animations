@@ -91,9 +91,8 @@ export default class ArenaSwitchAnimation extends React.Component<
   render() {
     let { phase, numberToStyles } = this.props;
     let { newPlayKey, oldPlayKey, initStyles, styleCalculator } = this.state;
-    let TransitionMotionA = TransitionMotion as any;
     return (
-      <TransitionMotionA defaultStyles={initStyles} styles={styleCalculator}>
+      <TransitionMotion defaultStyles={initStyles} styles={styleCalculator}>
         {(interpolatedStyles: TransitionPlainStyle[]) => {
           let containerStyle, newPlayStyle, oldPlayStyle;
           let phase: Phases = (interpolatedStyles.find(
@@ -127,7 +126,7 @@ export default class ArenaSwitchAnimation extends React.Component<
             </div>
           );
         }}
-      </TransitionMotionA>
+      </TransitionMotion>
     );
   }
 }

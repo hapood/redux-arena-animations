@@ -16,7 +16,7 @@ export type TestHOCProps = {
 export default class TestHOC extends React.Component<TestHOCProps> {
   render() {
     let props = this.props;
-    let ProviderA = Provider as any;
+    let ProviderA = Provider;
     return (
       <ProviderA store={props.store}>
         <SceneMotion
