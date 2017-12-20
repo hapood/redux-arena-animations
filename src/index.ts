@@ -17,5 +17,7 @@ export {
   InitMotionStyle as SwitchInitMotionStyle,
   NextPhaseCheckers as SwitchPhaseCheckers,
   NumberToStyles as SwitchNumberToStyles,
-  Phases as SwitchMotionPhases
+  Phases as SwitchMotionPhases,
+  connectComponent as switchConnCom
 } from "./SwitchMotion";
+export { AnimationProps } from "./types";

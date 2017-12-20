@@ -3,19 +3,24 @@ import { EnhancedStore } from "redux-arena";
 import { History } from "history";
 import { Provider } from "react-redux";
 import { Router, Switch } from "react-router-dom";
-import { Route } from "redux-arena-router";
-import { SwitchMotion } from "src";
+import { Route, RouteProps } from "redux-arena-router";
+import { SwitchMotion, switchConnCom } from "src";
 import {
   initStyles,
   styleCalculators,
   numberToStyles,
   nextPhaseCheckers
 } from "./switchAnimation";
+import { AnimationProps } from "src";
 
 export type TestHOCProps = {
   store: EnhancedStore;
   history: History;
 };
+
+let SwitchMotionRoute = switchConnCom(Route as React.ComponentType<
+  RouteProps & AnimationProps
+>);
 
 export default class TestHOC extends React.Component<TestHOCProps> {
   render() {
@@ -30,12 +35,12 @@ export default class TestHOC extends React.Component<TestHOCProps> {
             nextPhaseCheckers={nextPhaseCheckers}
           >
             <Switch>
-              <Route key="1" path="/pageA">
+              <SwitchMotionRoute key="1" path="/pageA">
                 <div />
-              </Route>
-              <Route key="2" path="/pageB">
+              </SwitchMotionRoute>
+              <SwitchMotionRoute key="2" path="/pageB">
                 <div />
-              </Route>
+              </SwitchMotionRoute>
             </Switch>
           </SwitchMotion>
         </Router>

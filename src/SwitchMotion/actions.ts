@@ -41,6 +41,14 @@ export function removePlay(node: ReactNode) {
   };
 }
 
+export function updatePlay(oldNode: ReactNode, newNode: ReactNode) {
+  return {
+    type: ActionTypes.ARENA_SWITCH_ANIMATION_PLAY_UPDATE,
+    oldNode,
+    newNode
+  };
+}
+
 export function playNext(PlayStrategies?: PlayStrategies) {
   return {
     type: ActionTypes.ARENA_SWITCH_ANIMATION_PLAY_NEXT,
@@ -53,5 +61,6 @@ export default {
   nextPhase,
   addPlay,
   removePlay,
-  playNext
+  playNext,
+  updatePlay
 } as Actions;
