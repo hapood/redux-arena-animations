@@ -40,7 +40,10 @@ function nextPhaseState(
 
 function playRemoveState(state: State, action: AnyAction) {
   let oldPlayKey = state.newPlayKey === "play1" ? "play2" : "play1";
-  if (state.phase == Phases.IN && (state as any)[oldPlayKey] === action.node) {
+  if (
+    state.phase == Phases.IN &&
+    (state as any)[oldPlayKey].node === action.node
+  ) {
     return Object.assign({}, state, { phase: Phases.LEAVING });
   } else if (state[state.newPlayKey].node === action.node) {
     return Object.assign({}, state, { autoClearPlay: action.node });
@@ -48,6 +51,29 @@ function playRemoveState(state: State, action: AnyAction) {
     return Object.assign({}, state, {
       playlist: state.playlist.filter(entity => entity.node !== action.node)
     });
+  }
+}
+
+function playUpdateState(state: State, action: AnyAction) {
+  let oldPlayKey = state.newPlayKey === "play1" ? "play2" : "play1";
+  let { oldNode, newNode } = action;
+  if ((state as any)[oldPlayKey].node === oldNode) {
+    return Object.assign({}, state, { [oldPlayKey]: { node: newNode } });
+  } else if (state[state.newPlayKey].node === oldNode) {
+    return Object.assign({}, state, {
+      [state.newPlayKey]: { node: newNode }
+    });
+  } else {
+    let index = state.playlist.findIndex(entity => entity.node === oldNode);
+    if (index > -1) {
+      return Object.assign({}, state, {
+        playlist: state.playlist
+          .slice(0, index)
+          .concat({ node: newNode })
+          .concat(state.playlist.slice(index + 1))
+      });
+    }
+    return state;
   }
 }
 
@@ -87,6 +113,8 @@ function reducer(state = initState, action: AnyAction) {
       });
     case ActionTypes.ARENA_SWITCH_ANIMATION_PLAY_REMOVE:
       return playRemoveState(state, action);
+    case ActionTypes.ARENA_SWITCH_ANIMATION_PLAY_UPDATE:
+      return playUpdateState(state, action);
     default:
       return state;
   }

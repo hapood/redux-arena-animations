@@ -8,6 +8,7 @@ import {
 } from "react-motion";
 import Phases from "./Phases";
 import PlayStrategies from "./PlayStrategies";
+import { AnimationProps } from "../types";
 
 export type StyleCalculator = (style: PlainStyle, phase: Phases) => Style;
 
@@ -68,6 +69,9 @@ export type Props = {
 export type Actions = {
   setState: (state: State) => void;
   nextPhase: (phase: Phases, oldPlayKey: string, oldPlay: PlayEntity) => void;
+  addPlay: (node: ReactNode) => void;
+  removePlay: (node: ReactNode) => void;
+  updatePlay: (oldNode: ReactNode, newNode: ReactNode) => void;
   playNext: (PlayStrategies?: PlayStrategies) => void;
 };
 
